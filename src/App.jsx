@@ -1,4 +1,6 @@
 import './App.css';
+import React from 'react';
+
 
 const TEST_DATA = [
   { id: 0, description: 'Content plan', rate: 50, hours: 4 },
