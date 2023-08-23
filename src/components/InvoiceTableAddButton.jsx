@@ -2,9 +2,12 @@ import React from 'react'
 
 function InvoiceAddButton() {
     return (
-        <div>
-            Add Button
-        </div>
+    <tr>
+      <td></td>
+      <td colSpan="4">
+        <button>Add</button>
+      </td>
+    </tr>
     )
 }
 

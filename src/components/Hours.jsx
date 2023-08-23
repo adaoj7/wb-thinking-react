@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Hours({isEditing}) {
+function Hours({isEditing,value}) {
     return isEditing ? (
         <td>
         <input type="text" value={value}/>

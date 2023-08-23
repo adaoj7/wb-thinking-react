@@ -1,13 +1,14 @@
 import React from 'react'
+import formatCurrency from '../utils/formatCurrency'
 
-function Rate({isEditing}) {
+function Rate({isEditing,value}) {
     return isEditing ? (
         <td>
         <input type="text" value={value}/>
     </td>
 ) : (
     <td>
-        {value}
+        {formatCurrency(value)}
     </td>
 )
 }

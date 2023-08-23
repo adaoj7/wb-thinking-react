@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import InvoiceTable from './components/InvoiceTable';
 
 
 const TEST_DATA = [
@@ -10,7 +11,7 @@ const TEST_DATA = [
 ];
 
 function App() {
-  return <p>FIXME</p>;
+  return <InvoiceTable initialInvoiceList={TEST_DATA}/>;
 }
 
 export default App;
