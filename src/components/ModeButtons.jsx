@@ -1,14 +1,14 @@
 import React from 'react'
 
-function ModeButtons({isEditing}) {
+function ModeButtons({isEditing,editClick,saveClick,onDeleteClick}) {
     return isEditing ? (
         <td>
-            <button>Save</button>
+            <button onClick={saveClick}>Save</button>
         </td>
     ) : (
         <td>
-            <button>Delete</button>
-            <button>Edit</button>
+            <button onClick={onDeleteClick}>Delete</button>
+            <button onClick={editClick}>Edit</button>
         </td>
     )
 }

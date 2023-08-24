@@ -7,18 +7,61 @@ import Rate from './Rate';
 import InvoiceTableHeader from './InvoiceTableHeader';
 import InvoiceAddButton from './InvoiceTableAddButton';
 import InvoiceTableRow from './InvoiceTableRow';
+import { useState } from 'react';
+import axios from 'axios';
 
-
+// let globalId = 5
 
 const InvoiceTable = ({initialInvoiceList}) => {
-  const rows = initialInvoiceList.map((invoiceItem) => {
+
+    const [currentList,setCurrentList] = useState(initialInvoiceList)
+
+    const addRow = async () => {
+        
+        let {data} = await axios.post('/addInvoice', {description: 'Description goes here'})
+        
+        const newInvoiceList = {...data}
+        setCurrentList([...currentList,newInvoiceList])
+        console.log(data)
+        console.log(initialInvoiceList)
+        // const newInvoiceList = [...currentList]
+        // let newRow = {
+        //     id: globalId,
+        //     description: 'Description',
+        //     rate: '',
+        //     hours: '',
+        //     isEditing: true
+        // }
+
+        // newInvoiceList.push(newRow)
+         
+
+        // globalId++
+    }
+
+    const deleteRow = async (id) => {
+
+        const {data} = await axios.delete(`/removeInvoice/${id}`)
+
+        if(!data.error){
+            const newInvoiceList = [...currentList]
+            const filteredList = newInvoiceList.filter((el)=>el.id !== id)
+            setCurrentList(filteredList)
+        }
+        console.log(data)
+        console.log(id)
+    }
+
+    const rows = currentList.map((invoiceItem) => {
     const {id,description,rate,hours} = invoiceItem
 
     return (
         <InvoiceTableRow
         key={id}
-        initialInvoiceData={{description,rate,hours}}
+        id={id}
+        initialInvoiceData={{id,description,rate,hours}}
         initialIsEditing={false}
+        deleteFunc={() => deleteRow(id)}
         />
     )
   })
@@ -32,7 +75,7 @@ const InvoiceTable = ({initialInvoiceList}) => {
             {rows}
             </tbody>
             <tfoot>
-                <InvoiceAddButton />
+                <InvoiceAddButton addClick={addRow} />
             </tfoot>
         </table>
     </div>
